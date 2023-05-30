@@ -4,7 +4,11 @@
 #include <cinttypes>
 #include <cstddef>
 
-namespace cmdinfer {
+//namespace cmdinfer {
+class cmdinfer {
+
+    public:
+
     void ReportStates(
         std::uint64_t sendTimeMs,
         std::uint64_t receiveTimeMs,
@@ -16,6 +20,8 @@ namespace cmdinfer {
         std::size_t headerLength);
 
     float GetEstimatedBandwidth();
-}
+
+};
+//}
 
 #endif

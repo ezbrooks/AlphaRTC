@@ -100,7 +100,9 @@ void RemoteEstimatorProxy::IncomingPacket(int64_t arrival_time_ms,
                           send_time_ms, header.ssrc, header.paddingLength,
                           header.headerLength, arrival_time_ms, payload_size, -1, -1);
   } else {
-    cmdinfer::ReportStates(
+    cmdinfer f;
+
+    f.ReportStates(
         send_time_ms,
         arrival_time_ms,
         payload_size,
@@ -119,7 +121,8 @@ void RemoteEstimatorProxy::IncomingPacket(int64_t arrival_time_ms,
     if (onnx_infer_) {
       estimation = onnxinfer::GetBweEstimate(onnx_infer_);
     } else {
-      estimation = cmdinfer::GetEstimatedBandwidth();
+      cmdinfer f;
+      estimation = f.GetEstimatedBandwidth();
     }
     bwe.pacing_rate = bwe.padding_rate = bwe.target_rate = estimation;
     bwe.timestamp_ms = clock_->TimeInMilliseconds();
